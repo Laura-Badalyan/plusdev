@@ -1,41 +1,24 @@
-import 'antd/dist/antd.min.css';
+import React from 'react';
 import './App.css';
-import {Route, Routes, BrowserRouter as Router} from 'react-router-dom';
+import { AuthProvider } from './context/auth-context';
+import { ConfigProvider } from 'antd';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { router } from './router';
+import { RouterProvider } from 'react-router-dom';
 
-import AppHeader from './components/common/header';
-import FooterWidget from './components/common/footerWidget';
-import FooterCopyright from './components/common/footerCopyright';
-import AppHome from './pages/home';
-import AppAbout from './pages/about';
-import AppShop from './pages/shop';
-import AppFAQ from './pages/faq';
-import AppContact from './pages/contact';
-
-import { Layout } from 'antd';
-const { Header, Content, Footer } = Layout;
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <Layout className="layout">
-      <Router>
-        <Header>
-          <AppHeader />
-        </Header>
-        <Content>
-          <Routes>
-            <Route path='/' element={<AppHome />} />
-            <Route path='/about' element={<AppAbout />} />
-            <Route path='/shop' element={<AppShop />} />
-            <Route path='/faq' element={<AppFAQ />} />
-            <Route path='/contact' element={<AppContact />} />
-          </Routes>
-        </Content>
-      </Router>
-      <Footer>
-        <FooterWidget />
-        <FooterCopyright />
-      </Footer>
-    </Layout>
+    <ConfigProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <React.StrictMode>
+            <RouterProvider router={router} />
+          </React.StrictMode>
+        </QueryClientProvider>
+      </AuthProvider>
+    </ConfigProvider>
   );
 }
 
