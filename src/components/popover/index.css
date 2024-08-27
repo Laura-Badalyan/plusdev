@@ -1,0 +1,15 @@
+.long-text {
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #ffffff;
+}
+
+.long-text .ant-popover-inner,
+.project-popover-node-type .ant-popover-inner {
+  background: transparent;
+  padding: 5px 10px;
+}
+
+.long-text .ant-popover-inner .ant-popover-title {
+  margin-bottom: 0;
+}
